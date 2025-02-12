@@ -27,7 +27,7 @@ kfp==2.7.0
 kfp-pipeline-spec==0.3.0
 kfp-server-api==2.0.5
 kubernetes==26.1.0
-lightgbm==4.3.0
+lightgbm==4.5.0
 MarkupSafe==2.1.5
 numpy==1.26.4
 oauthlib==3.2.2
