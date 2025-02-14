@@ -34,9 +34,11 @@ bucket_name, object_name = extract_bucket_and_object(SRC_MODEL_URI
                                                      + MODEL_NAME)
 storage_client = storage.Client()
 
+
 # バケットとオブジェクトを取得
 bucket = storage_client.get_bucket(bucket_name)
 blob = bucket.blob(object_name)
+
 
 # オブジェクトをローカルにダウンロード
 blob.download_to_filename(MODEL_NAME)
@@ -45,6 +47,15 @@ blob.download_to_filename(MODEL_NAME)
 # CPU または GPU のデバイスの利用を決める
 device = torch.accelerator.current_accelerator().type if torch.accelerator.is_available() else "cpu"
 print(f"Using {device} device")
+
+
+# Download test data from open datasets.
+test_data = datasets.FashionMNIST(
+    root="data",
+    train=False,
+    download=True,
+    transform=ToTensor(),
+)
 
 
 # NN を定義する
@@ -70,7 +81,7 @@ print(model)
 
 
 # モデルファイルをロード
-model.load_state_dict(torch.load("model.pth", weights_only=True))
+model.load_state_dict(torch.load("model.pth", map_location=torch.device(device), weights_only=True))
 
 
 
