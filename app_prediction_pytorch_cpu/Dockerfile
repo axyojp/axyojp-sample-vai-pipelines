@@ -1,6 +1,6 @@
 # Use the official lightweight Python image.
 # https://hub.docker.com/_/python
-us-docker.pkg.dev/vertex-ai/prediction/pytorch-cpu.2-4:latest
+FROM python:3.9-slim
 
 # Allow statements and log messages to immediately appear in the Knative logs
 ENV PYTHONUNBUFFERED True
